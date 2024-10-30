@@ -1,0 +1,25 @@
+.chk-perm-clear-link-form {
+	display:inline;
+}
+.chk-perm-clear-link-form .chk-perm-clear-link {
+	display:inline;
+	text-decoration:none;
+	border:none;
+	background-color:transparent;
+	font-size:12px;
+	color:gray;
+	transition:all 0.5s ease;
+}
+.chk-perm-clear-link-form .chk-perm-clear-link::before {
+	content:'[';
+}
+.chk-perm-clear-link-form .chk-perm-clear-link::after {
+	content:']';
+}
+.chk-perm-clear-link-form .chk-perm-clear-link:hover,
+.chk-perm-clear-link-form .chk-perm-clear-link:focus,
+.chk-perm-clear-link-form .chk-perm-clear-link:active {
+	text-decoration:underline;
+	color:black;
+}
+

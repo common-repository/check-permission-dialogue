@@ -1,0 +1,774 @@
+/*
+BEGIN Generic widget styling
+*/
+.chk-perm-widget {
+	padding:16px;
+	font-size:16px;
+	box-sizing:border-box;
+	position:relative;
+	font-family:sans-serif;
+	max-width:356px;
+	line-height:1;
+	
+	/* the background has to not be transparent because it will be a position:fixed overlay */
+	background-color:white;
+	
+	/* this is just for debugging */
+	border:1px solid #b1b1b1;
+}
+.chk-perm-widget .chk-p-icon-cont {
+	max-height:24px;
+	display:none;
+
+	/* wordpress styles (because wordpress sets defaults that are wrong) */
+	max-height:none;
+	box-sizing:border-box !important;
+}
+.chk-perm-widget .chk-p-icon {
+	max-height:24px;
+}
+.chk-perm-widget .chk-p-inline-icon {
+	max-height:16px;
+	display:none;
+}
+.chk-perm-widget .chk-p-hostname {
+}
+.chk-perm-widget .chk-p-hostname::after {
+	content:' wants to';
+}
+.chk-perm-widget a {
+	color:black;
+	text-decoration:none;
+	transition:all 0.5s ease;
+}
+.chk-perm-widget button {
+	/* an explicit transition is needed here because the buttons might be forms rather than links */
+	transition:all 0.5s ease;
+	background-color:transparent;
+	border:none;
+	border-radius:0px;
+}
+.chk-perm-widget a.chk-p-learn-link {
+	color:#6194c9;
+	display:none;
+}
+/*
+some themes by default add hover underlines in psuedoelements 
+but we don't want that here, so hide pseudoelements
+*/
+.chk-perm-widget a.chk-p-learn-link::before,
+.chk-perm-widget a.chk-p-learn-link::after {
+	display:none;
+}
+.chk-perm-widget .chk-p-learn-link-separator {
+	display:none;
+}
+.chk-perm-widget .chk-p-button-list {
+	font-size:0px;
+	margin-top:16px;
+}
+.chk-perm-widget .chk-p-button {
+	padding:12px 16px;
+	border:1px solid black;
+	display:inline-block;
+	box-sizing:border-box;
+	/*
+	even though this font size is over-written for all browsers
+	we must set a default because the button list has font-size 0
+	in order to align inline-block elements properly
+	*/
+	font-size:16px;
+
+	/* wordpress styles (because wordpress sets defaults that are wrong) */
+	color:black;
+	font-weight:normal;
+	text-transform:none;
+	text-decoration:none;
+	letter-spacing:0px;
+	
+	/* on browsers other than firefox, default button background color is transparent */
+	background-color:transparent;
+}
+.chk-perm-widget .chk-p-button:hover,
+.chk-perm-widget .chk-p-button:focus,
+.chk-perm-widget .chk-p-button:active {
+	box-shadow:0px 0px 10px #b1b1b1;
+}
+.chk-perm-widget .chk-p-button.block::before {
+	content:'Block';
+}
+.chk-perm-widget .chk-p-button.allow::before {
+	content:'Allow';
+}
+.chk-perm-widget .chk-p-button-form {
+	display:inline-block;
+	width:auto;
+}
+.chk-perm-widget .chk-p-close-button {
+	position:absolute;
+	top:0px;
+	right:0px;
+	text-decoration:none;
+	padding:8px;
+	font-size:18px;
+}
+
+/* position:fixed adjustments */
+.chk-perm-widget.fixed {
+	position:fixed;
+	top:0px;
+	left:176px;
+	z-index:1000;
+	/* z-index cannot be any lower than 100000 if it is to be above the wordpress admin panel :( */
+/*	z-index:100000; */
+}
+/*
+END Generic widget styling
+*/
+
+/*
+BEGIN wordpress-specific styling
+*/
+body.logged-in.admin-bar .chk-perm-widget.fixed {
+	top:32px;
+}
+body.logged-in.admin-bar .chk-perm-widget.fixed.firefox {
+	top:41.6px;
+}
+/*
+END wordpress-specific styling
+*/
+
+
+/*
+BEGIN Chrome Styling
+*/
+.chk-perm-widget.chrome {
+	background-color:#ffffff;
+	max-width:320px;
+	width:320px;
+}
+.chk-perm-widget.chrome .chk-p-inline-icon {
+	display:inline;
+	margin-right:8px;
+	margin-bottom:-2px;
+}
+.chk-perm-widget.chrome .chk-p-hostname {
+	margin-bottom:16px;
+}
+.chk-perm-widget.chrome .chk-p-hostname::after {
+	content:' wants to';
+}
+.chk-perm-widget.chrome .chk-p-permissions {
+	font-size:12px;
+}
+.chk-perm-widget.chrome .chk-p-button-list {
+	margin-top:16px;
+	text-align:right;
+}
+.chk-perm-widget.chrome .chk-p-button {
+	border-radius:4px;
+	padding:8px 24px;
+	display:inline-block;
+	margin-left:16px;
+	font-size:12px;
+}
+.chk-perm-widget.chrome .chk-p-button:hover,
+.chk-perm-widget.chrome .chk-p-button:focus,
+.chk-perm-widget.chrome .chk-p-button:active {
+	box-shadow:0px 0px 10px #b1b1b1;
+}
+.chk-perm-widget.chrome .chk-p-close-button {
+	position:absolute;
+	top:0px;
+	right:0px;
+	text-decoration:none;
+	padding:8px;
+	font-size:18px;
+	border:none;
+	background-color:transparent;
+
+	/* wordpress styles (because wordpress sets defaults that are wrong) */
+	color:black;
+}
+.chk-perm-widget.chrome .chk-p-close-button:hover,
+.chk-perm-widget.chrome .chk-p-close-button:focus,
+.chk-perm-widget.chrome .chk-p-close-button:active {
+	background-color:#bfbfbf;
+}
+/* position:fixed adjustments */
+.chk-perm-widget.chrome.fixed {
+	left:112px;
+}
+
+.chk-perm-widget.chrome.dark {
+	background-color:#cecece;
+}
+/*
+END Chrome Styling
+*/
+
+
+/*
+BEGIN Firefox styling
+*/
+.chk-perm-widget.firefox {
+	padding:0px;
+	border:1px solid #909090;
+	box-shadow:0px 0px 5px #b1b1b1;
+	font-size:14px;
+	background-color:white;
+	width:356px;
+}
+/* border for the "up" arrow in the upper-left corner */
+.chk-perm-widget.firefox::before {
+	content:' ';
+	position:absolute;
+	top:-9px;
+	left:16px;
+	transform:translateX(-50%);
+	border-bottom:8px solid #909090;
+	border-left:8px solid transparent;
+	border-right:8px solid transparent;
+}
+/* small "up" arrow in the upper-left corner */
+.chk-perm-widget.firefox::after {
+	content:' ';
+	position:absolute;
+	top:-8px;
+	left:16px;
+	transform:translateX(-50%);
+	border-bottom:8px solid white;
+	border-left:8px solid transparent;
+	border-right:8px solid transparent;
+}
+.chk-perm-widget.firefox .chk-p-icon-cont {
+	display:inline-block;
+	float:left;
+	padding:16px;
+	
+	/* wordpress styles (because wordpress sets defaults that are wrong) */
+	height:90px;
+}
+.chk-perm-widget.firefox .chk-p-icon {
+	height:24px;
+	display:block;
+}
+.chk-perm-widget.firefox .chk-p-inline-icon {
+	display:none;
+}
+.chk-perm-widget.firefox .chk-p-text {
+	padding:16px;
+	min-height:64px;
+}
+.chk-perm-widget.firefox .chk-p-hostname {
+	display:inline;
+	font-weight:bold;
+}
+.chk-perm-widget.firefox .chk-p-hostname::before {
+	content:'Will you allow ';
+	font-weight:normal;
+}
+.chk-perm-widget.firefox .chk-p-hostname::after {
+	content:' to ';
+	font-weight:normal;
+}
+.chk-perm-widget.firefox .chk-p-permissions {
+	display:inline;
+	text-transform:lowercase;
+}
+.chk-perm-widget.firefox .chk-p-permissions::after {
+	content:'?';
+	margin-right:0px;
+	margin-left:-3px;
+}
+.chk-perm-widget.firefox a.chk-p-learn-link {
+	color:#3a9ee5;
+	display:inline-block;
+	width:auto;
+	margin-top:16px;
+}
+.chk-perm-widget.firefox .chk-p-learn-link-separator {
+	display:block;
+}
+.chk-perm-widget.firefox a.chk-p-learn-link:hover,
+.chk-perm-widget.firefox a.chk-p-learn-link:active,
+.chk-perm-widget.firefox a.chk-p-learn-link:focus {
+	text-decoration:underline;
+}
+.chk-perm-widget.firefox .chk-p-button-list {
+	margin-top:0px;
+}
+.chk-perm-widget.firefox .chk-p-button {
+	width:50%;
+	text-align:center;
+	border:1px solid #b5b5b5;
+	font-size:14px;
+}
+.chk-perm-widget.firefox .chk-p-button:hover,
+.chk-perm-widget.firefox .chk-p-button:focus,
+.chk-perm-widget.firefox .chk-p-button:active {
+	box-shadow:none;
+}
+.chk-perm-widget.firefox .chk-p-button.block {
+	background-color:#eeeeee;
+}
+.chk-perm-widget.firefox .chk-p-button.block:hover,
+.chk-perm-widget.firefox .chk-p-button.block:focus,
+.chk-perm-widget.firefox .chk-p-button.block:active {
+	background-color:#e4e4e4;
+}
+
+.chk-perm-widget.firefox .chk-p-button.allow {
+	background-color:#0996f8;
+	color:white;
+}
+.chk-perm-widget.firefox .chk-p-button.allow:hover,
+.chk-perm-widget.firefox .chk-p-button.allow:focus,
+.chk-perm-widget.firefox .chk-p-button.allow:active {
+	background-color:#0675d3;
+}
+.chk-perm-widget.firefox .chk-p-close-button-form,
+.chk-perm-widget.firefox .chk-p-close-button {
+	display:none;
+}
+.chk-perm-widget.firefox .chk-p-button.block::before {
+	content:"Don't Allow";
+}
+.chk-perm-widget.firefox .chk-p-button.allow::before {
+	content:'Allow Access';
+}
+.chk-perm-widget.firefox .chk-p-button-form {
+	width:50%;
+}
+.chk-perm-widget.firefox .chk-p-button-form .chk-p-button {
+	width:100%;
+}
+/* position:fixed adjustments */
+.chk-perm-widget.firefox.fixed {
+	top:10px;
+}
+/*
+END Firefox styling
+*/
+
+/*
+BEGIN iOS styling
+*/
+.chk-perm-widget.ios, .chk-perm-widget.ios.fixed, body.logged-in.admin-bar .chk-perm-widget.fixed.ios {
+	/* certain mobile adjustments always get applied on iOS */
+	position:absolute;
+	top:50%;
+	left:50%;
+	bottom:unset;
+	background-color:white;
+	border-radius:8px;
+	box-shadow:0px 0px 5px #b1b1b1;
+	transform:translateY(-50%) translateX(-50%);
+	margin-left:auto;
+	margin-right:auto;
+	width:100%;
+	max-width:300px;
+
+	border-radius:16px;
+}
+.chk-perm-widget.ios .chk-p-text {
+	text-align:center;
+}
+.chk-perm-widget.ios .chk-p-hostname {
+	font-weight:bold;
+}
+.chk-perm-widget.ios .chk-p-hostname::before {
+	content:'Allow ';
+}
+.chk-perm-widget.ios .chk-p-hostname::after {
+	content:' to';
+}
+.chk-perm-widget.ios .chk-p-permissions {
+	font-weight:bold;
+}
+.chk-perm-widget.ios .chk-p-permissions::after {
+	content:'?';
+}
+.chk-perm-widget.ios .chk-p-button-list {
+/*	margin-bottom:-16px; */
+	margin-bottom:-17px;
+}
+.chk-perm-widget.ios .chk-p-button-form {
+	width:calc(50% + 16px);
+}
+.chk-perm-widget.ios .chk-p-button-form:first-child {
+	margin-left:-16px;
+}
+.chk-perm-widget.ios .chk-p-button-form:last-child {
+	margin-right:-16px;
+}
+.chk-perm-widget.ios .chk-p-button {
+	width:100%;
+	margin-left:0px;
+	color:#157efb;
+	border-radius:0px 0px 16px 16px;
+	border:1px solid #e0e0e1;
+	padding:16px;
+}
+.chk-perm-widget.ios .chk-p-button.block {
+	border-radius:0px 0px 0px 16px;
+}
+.chk-perm-widget.ios .chk-p-button.allow {
+	border-radius:0px 0px 16px 0px;
+}
+.chk-perm-widget.ios .chk-p-button.block::before {
+	content:'Don\'t Allow';
+}
+.chk-perm-widget.ios .chk-p-button.allow::before {
+	content:'Allow';
+}
+.chk-perm-widget.ios .chk-p-button:hover,
+.chk-perm-widget.ios .chk-p-button:focus,
+.chk-perm-widget.ios .chk-p-button:active {
+	background-color:#efefef;
+}
+.chk-perm-widget.ios .chk-p-close-button {
+	display:none;
+}
+
+/*
+END iOS styling
+*/
+
+
+/*
+BEGIN mobile styling (that can be applied explicitly even on non-mobile displays)
+*/
+.chk-perm-widget-bg.mobile-preview {
+	background-color:rgba(0,0,0,0.5);
+	position:relative;
+	padding:48px;
+	min-height:200px;
+}
+.chk-perm-widget-bg.mobile-preview::before,
+.chk-perm-widget-bg.mobile-preview::after {
+	content:' ';
+	display:table;
+	clear:both;
+}
+
+.chk-perm-widget-bg.mobile {
+	background-color:rgba(0,0,0,0.5);
+	/* NOTE: this is not position:absolute because we don't want to let users scroll past the dialog */
+	position:fixed;
+	top:0px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	z-index:1000;
+}
+/*
+END mobile styling
+*/
+
+
+/*
+BEGIN mobile styling using media-query
+*/
+@media screen and (max-width:640px) {
+	.chk-perm-widget-bg {
+		background-color:rgba(0,0,0,0.5);
+		/* NOTE: this is not position:absolute because we don't want to let users scroll past the dialog */
+		position:fixed;
+		left:0px;
+		right:0px;
+		top:0px;
+		bottom:0px;
+		z-index:1000;
+	}
+	.chk-perm-widget, .chk-perm-widget.fixed, body.logged-in.admin-bar .chk-perm-widget.fixed, body.logged-in.admin-bar .chk-perm-widget.fixed.firefox {
+		position:absolute;
+		top:50%;
+		bottom:unset;
+		left:24px;
+		right:24px;
+		background-color:white;
+		border-radius:8px;
+		box-shadow:0px 0px 5px #b1b1b1;
+		transform:translateY(-50%);
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.chk-perm-widget .chk-p-button-form {
+		display:inline-block;
+		width:50%;
+	}
+	.chk-perm-widget .chk-p-button {
+		width:100%;
+	}
+
+	/*
+	BEGIN mobile firefox styling
+	*/
+	.chk-perm-widget.firefox, .chk-perm-widget.firefox.fixed, body.logged-in.admin-bar .chk-perm-widget.fixed.firefox {
+		top:50%;
+		left:24px;
+		width:auto;
+		border-radius:0px;
+	}
+	.chk-perm-widget.firefox::before, .chk-perm-widget.firefox::after {
+		display:none;
+	}
+	/*
+	END mobile firefox styling
+	*/
+
+	/*
+	BEGIN mobile chrome (Android default) styling
+	*/
+	.chk-perm-widget.chrome, .chk-perm-widget.chrome.fixed {
+		background-color:white;
+		left:24px;
+		top:50%;
+		width:auto;
+		border-radius:4px;
+		padding:24px 16px 0px 16px;
+	}
+	.chk-perm-widget.chrome .chk-p-icon-cont {
+		display:inline-block;
+		float:left;
+		padding:0px 16px 32px 0px;
+	}
+	.chk-perm-widget.chrome .chk-p-icon {
+		max-height:24px;
+		display:block;
+	}
+	.chk-perm-widget.chrome .chk-p-inline-icon {
+		display:none;
+	}
+	.chk-perm-widget.chrome .chk-p-hostname {
+		font-weight:bold;
+		margin-bottom:0px;
+	}
+	.chk-perm-widget.chrome .chk-p-hostname::before {
+		content:'Allow ';
+		font-weight:normal;
+	}
+	.chk-perm-widget.chrome .chk-p-hostname::after {
+		content:' to';
+		font-weight:normal;
+	}
+	.chk-perm-widget.chrome .chk-p-permissions {
+		font-size:16px;
+		display:inline;
+	}
+	.chk-perm-widget.chrome .chk-p-permissions::after {
+		content:'?';
+	}
+	.chk-perm-widget.chrome .chk-p-button-form {
+		width:auto;
+	}
+	.chk-perm-widget.chrome .chk-p-button {
+		width:auto;
+		float:right;
+		margin-left:0px;
+		color:#009688;
+		border-radius:0px;
+		border:none;
+		text-transform:uppercase;
+		font-weight:bold;
+		font-size:13px;
+		padding:24px;
+	}
+	.chk-perm-widget.chrome .chk-p-button:hover,
+	.chk-perm-widget.chrome .chk-p-button:focus,
+	.chk-perm-widget.chrome .chk-p-button:active {
+		background-color:#bfbfbf;
+		color:#006658;
+		box-shadow:none;
+	}
+	.chk-perm-widget.chrome .chk-p-button.block::before {
+		content:'Deny';
+	}
+	.chk-perm-widget.chrome .chk-p-button.allow::before {
+		content:'Allow';
+	}
+	.chk-perm-widget.chrome .chk-p-close-button {
+		display:none;
+	}
+
+	/*
+	END mobile chrome (Android default) styling
+	*/
+
+	/*
+	BEGIN mobile iOS styling
+	*/
+	.chk-perm-widget.ios, .chk-perm-widget.ios.fixed {
+		left:24px;
+		right:24px;
+		transform:translateY(-50%);
+	}
+
+	/*
+	END mobile iOS styling
+	*/
+}
+/*
+END mobile styling using media-query
+*/
+
+/*
+BEGIN wordpress admin preview styling
+*/
+	.chk-perm-admin-settings {
+		padding:16px 16px 16px 0px;
+		line-height:1.5;
+	}
+	.chk-perm-admin-settings .mobile-only {
+		display:none;
+	}
+	@media screen and (max-width:640px) {
+		.chk-perm-admin-settings .mobile-only {
+			display:block;
+		}
+	}
+	.chk-perm-admin-settings .note::before {
+		content:'NOTE: ';
+	}
+	.chk-perm-admin-settings .note {
+		font-size:13px;
+	}
+	.chk-perm-preview-frame {
+		position:relative;
+		border:1px solid black;
+		box-shadow:0px 0px 8px rgba(0,0,0,0.15);
+		background-color:rgba(0,0,0,0.4);
+		padding-bottom:80px;
+		box-sizing:border-box;
+	}
+	.chk-perm-preview-frame .chk-perm-widget-preview-browser {
+		width:100%;
+		height:48px;
+		font-weight:600;
+	}
+	.chk-perm-preview-frame .chk-perm-widget-bg {
+		min-height:192px;
+		margin-top:48px;
+	}
+	@media screen and (max-width:640px) {
+		.chk-perm-preview-frame .chk-perm-widget-bg {
+			position:relative;
+		}
+	}
+	.chk-perm-preview-frame .chk-perm-widget {
+		margin-left:auto;
+		margin-right:auto;
+	}
+
+	/*
+	BEGIN mobile firefox styling (preview)
+	*/
+	.chk-perm-preview-frame.mobile .chk-perm-widget.firefox, .chk-perm-preview-frame.mobile .chk-perm-widget.firefox.fixed {
+		top:50%;
+		left:24px;
+		width:auto;
+		border-radius:0px;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.firefox::before, .chk-perm-preview-frame.mobile .chk-perm-widget.firefox::after {
+		display:none;
+	}
+	/*
+	END mobile firefox styling (preview)
+	*/
+
+	/*
+	BEGIN mobile chrome (Android default) styling (preview)
+	*/
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome, .chk-perm-preview-frame.mobile .chk-perm-widget.chrome.fixed {
+		background-color:white;
+		left:24px;
+		top:50%;
+		width:auto;
+		border-radius:4px;
+		padding:24px 16px 0px 16px;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-icon-cont {
+		display:inline-block;
+		float:left;
+		padding:0px 16px 32px 0px;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-icon {
+		max-height:24px;
+		display:block;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-inline-icon {
+		display:none;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-hostname {
+		font-weight:bold;
+		margin-bottom:0px;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-hostname::before {
+		content:'Allow ';
+		font-weight:normal;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-hostname::after {
+		content:' to';
+		font-weight:normal;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-permissions {
+		font-size:16px;
+		display:inline;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-permissions::after {
+		content:'?';
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-button-form {
+		width:auto;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-button {
+		width:auto;
+		float:right;
+		margin-left:0px;
+		color:#009688;
+		border-radius:0px;
+		border:none;
+		text-transform:uppercase;
+		font-weight:bold;
+		font-size:13px;
+		padding:24px;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-button:hover,
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-button:focus,
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-button:active {
+		background-color:#bfbfbf;
+		color:#006658;
+		box-shadow:none;
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-button.block::before {
+		content:'Deny';
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-button.allow::before {
+		content:'Allow';
+	}
+	.chk-perm-preview-frame.mobile .chk-perm-widget.chrome .chk-p-close-button {
+		display:none;
+	}
+
+	/*
+	END mobile chrome (Android default) styling (preview)
+	*/
+
+	/*
+	BEGIN mobile iOS styling (preview)
+	*/
+	.chk-perm-preview-frame.mobile .chk-perm-widget.ios, .chk-perm-preview-frame.mobile .chk-perm-widget.ios.fixed {
+		left:24px;
+		right:24px;
+		transform:translateY(-50%);
+	}
+
+	/*
+	END mobile iOS styling (preview)
+	*/
+
+/*
+END wordpress admin preview styling
+*/

@@ -1,0 +1,20 @@
+Integration with wordpress hooks so this can be packaged as a wordpress plugin
+	wordpress hooks
+		before html output
+			call chk_perm_handle_getback('cookie')
+			call chk_perm_load_start
+		
+		during html output
+			call chk_perm_show_widget
+			enable a shortcode for chk_perm_clear_link
+
+		after html output should be complete
+			call chk_perm_load_end($perm_keys=['cookie'])
+
+	wordpress settings page
+		widget preview display
+			dropdown menu to select device-specific class in order to preview the display for different devices
+			for iOS and android this will be within a container so it doesn't cover the entire page in the admin view
+		allow enabling/disabling individual permissions (for now just cookie)
+
+
